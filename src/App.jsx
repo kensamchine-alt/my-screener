@@ -237,7 +237,7 @@ Be specific, use the actual numbers, keep it concise.`
       const data = await res.json();
       setAiNote(data.content?.map(b => b.text || "").join("") || "Could not generate note.");
     } catch {
-      setAiNote("Could not generate AI note. Make sure you are running on a deployed URL, not localhost.");
+      setAiNote("Could not generate AI note.");
     }
     setAiLoading(false);
     setNotesLoaded(true);
@@ -372,7 +372,7 @@ export default function CryptoScreener() {
       });
       const data = await res.json();
       setAiInsight(data.content?.map(b => b.text || "").join("") || "");
-    } catch { setAiInsight("AI summary unavailable on localhost. Deploy to Vercel to enable."); }
+    } catch { setAiInsight("Could not load insight."); }
     setAiLoading(false);
   }
 
