@@ -19,9 +19,10 @@ export default async function handler(req, res) {
       }),
     });
     const data = await response.json();
-    const text = data.choices?.[0]?.message?.content || 'Could not generate note.';
+    if (!response.ok) return res.status(200).json({ content: [{ text: 'Groq error: ' + JSON.stringify(data) }] });
+    const text = data.choices?.[0]?.message?.content || 'No content returned.';
     res.status(200).json({ content: [{ text }] });
   } catch (e) {
-    res.status(500).json({ error: e.message });
+    res.status(200).json({ content: [{ text: 'Exception: ' + e.message }] });
   }
 }
